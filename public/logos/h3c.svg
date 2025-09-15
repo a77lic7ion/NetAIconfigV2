@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 60">
+  <title>H3C Logo</title>
+  <style>.heavy { font: bold 50px sans-serif; fill: #D01015; }</style>
+  <text x="5" y="45" class="heavy">H</text>
+  <text x="45" y="45" class="heavy">3</text>
+  <text x="80" y="45" class="heavy">C</text>
+</svg>

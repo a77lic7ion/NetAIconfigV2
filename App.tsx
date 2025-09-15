@@ -13,6 +13,7 @@ import ErrorMessage from './components/ErrorMessage';
 import ConfigurationReport from './components/ConfigurationReport';
 import FindingCard from './components/FindingCard';
 import FeatureCard from './components/FeatureCard';
+import VendorLogo from './components/VendorLogo';
 
 declare var jspdf: any;
 declare var htmlToImage: any;
@@ -227,7 +228,10 @@ const App: React.FC = () => {
           <div className="md:col-span-2">
             <h4 className="text-light-text font-semibold mb-2">Uploaded File:</h4>
             <div className="flex items-center justify-between bg-light-background/60 p-2 rounded-md">
-                <span className="text-sm text-medium-text">{uploadedFile.name} ({uploadedFile.vendor})</span>
+                <div className="flex items-center gap-3">
+                  <VendorLogo vendor={uploadedFile.vendor} className="h-6 w-auto" />
+                  <span className="text-sm text-medium-text">{uploadedFile.name}</span>
+                </div>
                 <button onClick={handleRemoveFile} className="text-red-400 hover:text-red-600 font-bold text-lg">&times;</button>
             </div>
           </div>

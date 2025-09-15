@@ -3,6 +3,7 @@
 import React, { ReactNode } from 'react';
 import { ParsedConfigData, VendorName } from '../types';
 import Section from './Section';
+import VendorLogo from './VendorLogo';
 
 const SimpleTable: React.FC<{ headers: string[], data: (string | number | ReactNode)[][] }> = ({ headers, data }) => (
   <div className="overflow-x-auto rounded-lg border border-light-background">
@@ -59,7 +60,7 @@ const RawConfigViewer: React.FC<{ title: string, configs: (string[] | undefined)
 
 
 const ConfigurationReport: React.FC<{ config: ParsedConfigData }> = ({ config }) => {
-    if (!config) return <div className="text-center p-8">No configuration data to display.</div>;
+    if (!config || !config.vendor) return <div className="text-center p-8">No configuration data to display.</div>;
 
     const allPorts = config.ports || [];
     // A port is considered "configured" if its config array has more than just the `interface...` line and the closing `!`
@@ -71,9 +72,15 @@ const ConfigurationReport: React.FC<{ config: ParsedConfigData }> = ({ config })
             {/* --- RENDER LOGIC FOR DETAILED CISCO PARSED DATA --- */}
             {config.vendor === VendorName.CISCO && config.hostname ? (
                 <div className="space-y-6">
-                    <Section title="Switch Information">
-                        <ul className="space-y-1 text-medium-text">
-                            <DetailItem label="Hostname" value={config.hostname} />
+                    <Section title="Device Information">
+                        <div className="flex items-center gap-4">
+                            <VendorLogo vendor={config.vendor} className="h-12 w-auto" />
+                            <div>
+                                <h3 className="text-2xl font-bold text-dark-text">{config.hostname}</h3>
+                                <p className="text-sm text-light-text">{config.vendor}</p>
+                            </div>
+                        </div>
+                        <ul className="space-y-1 text-medium-text mt-4 border-t border-light-background pt-4">
                             <DetailItem label="iOS Version" value={config.iosVersion} />
                             <DetailItem label="Model Number" value={config.modelNumber} />
                         </ul>
@@ -225,7 +232,14 @@ const ConfigurationReport: React.FC<{ config: ParsedConfigData }> = ({ config })
                 </div>
             ) : (
                 // --- FALLBACK RENDER FOR GEMINI-PARSED DATA ---
-                <Section title={`Configuration Summary for ${config.fileName}`}>
+                <Section title="Configuration Summary">
+                    <div className="flex items-center gap-4 mb-4">
+                        <VendorLogo vendor={config.vendor} className="h-12 w-auto" />
+                        <div>
+                            <h3 className="text-2xl font-bold text-dark-text">{config.deviceInfo?.hostname || config.fileName}</h3>
+                            <p className="text-sm text-light-text">{config.vendor}</p>
+                        </div>
+                    </div>
                     <p className="text-light-text mb-4">This is a summary view. Detailed reporting is available for Cisco configs.</p>
                     <pre className="p-4 bg-medium-background/70 rounded-lg text-sm text-medium-text overflow-auto">
                         {JSON.stringify({

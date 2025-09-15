@@ -1,4 +1,5 @@
 
+
 import { VendorName, SupportedVendor, PieChartData } from './types';
 
 export const APP_TITLE = "NetConfig Analyzer";
@@ -7,9 +8,10 @@ export const APP_SUBTITLE = "Automated analysis and conflict detection for diver
 export const GEMINI_TEXT_MODEL = "gemini-2.5-flash";
 
 export const SUPPORTED_VENDORS_DATA: SupportedVendor[] = [
-  { name: VendorName.CISCO, extensions: [".txt", ".cfg", ".log"], os: ["IOS", "NX-OS"] },
-  { name: VendorName.HUAWEI, extensions: [".txt", ".cfg", ".dat"], os: ["VRP"] },
-  { name: VendorName.JUNIPER, extensions: [".txt", ".cfg", ".conf"], os: ["Junos"] },
+  { name: VendorName.CISCO, extensions: [".txt", ".cfg", ".log"], os: ["IOS", "NX-OS"], logo: "/logos/cisco.svg" },
+  { name: VendorName.HUAWEI, extensions: [".txt", ".cfg", ".dat"], os: ["VRP"], logo: "/logos/huawei.svg" },
+  { name: VendorName.JUNIPER, extensions: [".txt", ".cfg", ".conf"], os: ["Junos"], logo: "/logos/juniper.svg" },
+  { name: VendorName.H3C, extensions: [".cfg", ".txt"], os: ["Comware"], logo: "/logos/h3c.svg" },
 ];
 
 export const PIE_CHART_DATA: PieChartData[] = [
@@ -30,8 +32,8 @@ export const KEY_CONFIG_ELEMENTS_TO_PARSE: string[] = [
 ];
 
 export const CORE_FEATURES_DATA = [
-  { module: "Configuration Ingestion", functionality: "Upload multiple configuration files (.txt, .cfg, .log) from various vendors", vendors: "Cisco IOS/NX-OS, Huawei VRP, Juniper Junos" },
-  { module: "Multi-Vendor Parsing Engine", functionality: "Extracts structured data from raw configurations (interfaces, VLANs, routing, security, etc.)", vendors: "Cisco, Huawei, Juniper" },
+  { module: "Configuration Ingestion", functionality: "Upload multiple configuration files (.txt, .cfg, .log) from various vendors", vendors: "Cisco IOS/NX-OS, Huawei VRP, Juniper Junos, H3C Comware" },
+  { module: "Multi-Vendor Parsing Engine", functionality: "Extracts structured data from raw configurations (interfaces, VLANs, routing, security, etc.)", vendors: "Cisco, Huawei, Juniper, H3C" },
   { module: "Data Normalization & Storage", functionality: "Standardizes parsed data into a unified schema for cross-vendor comparison", vendors: "All supported vendors" },
   { module: "Conflict Detection & Analysis", functionality: "Identifies discrepancies and potential conflicts across multiple configurations (e.g., overlapping IPs, mismatched VLANs, inconsistent security policies)", vendors: "Cross-vendor" },
   { module: "Interactive Dashboard", functionality: "Visualizes parsed data and highlights conflicts with an intuitive, modern UI", vendors: "All supported vendors" },
